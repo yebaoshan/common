@@ -242,6 +242,21 @@ void test_utils_time()
         printf("rfc3339_local error\n");
 }
 
+void test_timeval_cmp()
+{
+    int ret = 0;
+    struct timeval tv0, tv1, delta;
+    gettimeofday(&tv0, NULL);
+    sleep(1);
+    gettimeofday(&tv1, NULL);
+    ret = timeval_cmp(tv0, tv1, &delta);
+
+    printf("========%s========\n", __FUNCTION__);
+    printf("tv0_sec:%lu, tv0_usec:%lu; tv1_sec:%lu, tv1_usec:%lu; "
+           "delta_sec:%lu, delta_usec:%lu\n",
+           tv0.tv_sec, tv0.tv_usec, tv1.tv_sec, tv1.tv_usec,
+           delta.tv_sec, delta.tv_usec);
+}
 
 void main()
 {
@@ -264,6 +279,7 @@ void main()
 
     test_utils_time();
 
+    test_timeval_cmp();
 }
 
 
